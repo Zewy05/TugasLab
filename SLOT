@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    char symbols[] = {'$', '#', '@', '*', '%', '&'};
+
+    srand(time(NULL));
+
+    int playAgain = 1;
+    int money = 1000; 
+
+    
+    while (playAgain) {
+        char symbol1 = symbols[rand() % 6];
+        char symbol2 = symbols[rand() % 6];
+        char symbol3 = symbols[rand() % 6];
+
+        printf("Spin: %c %c %c\n", symbol1, symbol2, symbol3);
+
+        if ((symbol1 == symbol2) || (symbol2 == symbol3) || (symbol1 == symbol3)) {
+            printf("SENSATIONAL!\n");
+            money += 50; 
+        } else if (symbol1 == symbol2 && symbol2 == symbol3) {
+            printf("MAXWINNN!\n");
+            money += 100; 
+        } else {
+            printf("KALAH DEPO LAGI!\n");
+            money -= 10;
+        }
+
+        printf("Money: $%d\n", money);
+
+        if (money <= 0) {
+            printf("Game over! You ran out of money.\n");
+            break;
+        }
+
+        printf("Play again? (1 for Yes, 0 for No): ");
+        scanf("%d", &playAgain);
+    }
+
+    return 0;
+}
